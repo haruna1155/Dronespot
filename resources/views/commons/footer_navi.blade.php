@@ -1,8 +1,7 @@
 <footer>
-    <nav class="navbar navbar-expand navbar-light" style="background-color: #66CCFF;">
+    <div class="footer_navi navbar navbar-expand-sm navbar-light">
         <a class="navbar-brand pl-5" href="/">DRON SPOT</a>
         
-        <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
                 @if(Auth::check()) 
                     <li class="nav-item active"><a href='/' class="nav-link">HOME</a></li>
@@ -17,10 +16,5 @@
                 @endif
                 
             </ul>
-        </div>    
-        
-        <div style="text-align:center;">
-            <small>&copy; 2020 Haru</small>
-        </div>
-    </nav>
+    </div>
 </footer>
