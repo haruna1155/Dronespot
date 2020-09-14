@@ -16,10 +16,17 @@
         <div class="container">
             {{-- エラーメッセージ --}}
             @include('commons.error_messages')
-            
+
             @yield('content')
         </div>
-        
+
+        <div class="container">
+            <div class="row">
+                <div class="colums">
+                </div>
+            </div>
+        </div>
+
         {{--フッター--}}
         @include('commons.footer_navi')
 
