@@ -1,6 +1,6 @@
 #!/bin/sh
+rm -rf /app/composer.lock
 composer install
 
-cd /app
-cp .env.example .env
-php artisan key:generate
+cp /app/.env.example /app/.env
+php /app/artisan key:generate
