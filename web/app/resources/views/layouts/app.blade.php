@@ -20,13 +20,6 @@
             @yield('content')
         </div>
 
-        <div class="container">
-            <div class="row">
-                <div class="colums">
-                </div>
-            </div>
-        </div>
-
         {{--フッター--}}
         @include('commons.footer_navi')
 
