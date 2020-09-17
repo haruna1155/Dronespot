@@ -16,9 +16,9 @@
                 <div class="list-group list-group-flush">
                     <p class="list-group-item">投稿日時:</p> {{-- $spot->created_at --}}
                     <p class="list-group-item">ユーザー名:</p> {{-- $spot->user --}}
-                    <p class="list-group-item">エリア：</p> {{-- $spot->aria --}}
+                    <p class="list-group-item">エリア：</p> {{-- $spot->area --}}
                     <p class="list-group-item">アクセス：</p> {{-- $spot->access --}}
-                    <p class="list-group-item">ユーザーコメント：</p> {{-- $spot->content --}}
+                    <p class="list-group-item">ユーザーコメント：</p> {{-- $spot->comment --}}
                 </div>
                     <div class="card-body d-flex justify-content-end">
                     {{--@if(Auth::check())--}}
