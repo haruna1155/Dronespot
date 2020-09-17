@@ -7,32 +7,37 @@
 
 
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="card detail mt-3 mb-5 d-flex justify-content-center">
-                <img class="card-img-top mx-auto" src="{{ asset('/img/test2.jpg') }}" alt="posts"> {{-- $spot->photo --}}
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item">スポット：</li> {{-- $spot->spot --}}
-                    <li class="list-group-item">アクセス：</li> {{-- $spot->access --}}
-                </ul>
-
-                <div class="row mt-1 mb-2 d-flex justify-content-around">
-                {{--@if(Auth::check())--}}
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-outline-warning btn-sm">お気に入り</a>
-
-                    </div>
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-outline-warning btn-sm">編集</a>
-
-                    </div>
-                    <div class="btn-group">
-                        <a href="#" class="btn btn-outline-denger btn-sm">削除</a>
-
-                    </div>
-               {{-- @endif  --}}
+        <div class="row d-flex justify-content-sm-center">
+            <div class="post-photo" style="width: 600px">
+                <img src=img/test2.jpg alt="posts">{{-- $spot->photo --}}
+            </div>
+            <div class="card mt-3" style="width: 45rem;">
+                <h5 class="card-header">スポット</h5> {{-- $spot->spot --}}
+                <div class="list-group list-group-flush">
+                    <p class="list-group-item">投稿日時:</p> {{-- $spot->created_at --}}
+                    <p class="list-group-item">ユーザー名:</p> {{-- $spot->user --}}
+                    <p class="list-group-item">エリア：</p> {{-- $spot->aria --}}
+                    <p class="list-group-item">アクセス：</p> {{-- $spot->access --}}
+                    <p class="list-group-item">ユーザーコメント：</p> {{-- $spot->content --}}
+                </div>
+                    <div class="card-body d-flex justify-content-end">
+                    {{--@if(Auth::check())--}}
+                    <a href="#" class="btn btn-outline-warning btn-sm"><i class="fas fa-star"></i></a> {{--お気に入り--}}
+                    <a href="#" class="btn btn-outline-success btn-sm"><i class="fas fa-edit"></i></a> {{--編集--}}
+                    <a href="#" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></a> {{--削除--}}
+                    {{-- @endif  --}}
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="row mt-3 mb-4">
+        <div class="col-sm">
+            <div class="d-flex justify-content-center btn-block">
+                <a href='#' class="btn btn-secondary">戻る</a>
+            </div>
+        </div>
+    </div>
+
 
 @endsection

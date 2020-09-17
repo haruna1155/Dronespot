@@ -6,15 +6,15 @@
     </div>
     <div class="main_visual d-flex justify-content-sm-around">
         <figure>
-            <a href="#" class="nav-link"><img src="{{ asset('/img/dronespot_2.jpg') }}" alt="見つける"></a>
+            <a href="#" class="nav-link"><img src="img/dronespot_2.jpg" alt="見つける"></a>
             <figcaption>スポット一覧へ</figcaption>
         </figure>
 
         <figure>
-            <a href="#"><img src="{{ asset('/img/dronespot_1.jpg') }}" alt="共有する"></a>
+            <a href="#" class="nav-link"><img src="img/dronespot_1.jpg" alt="共有する"></a>
             <figcaption>
                 マイページへ<br>
-                <small="mt-2">新規会員登録はこちら</small>　{{--リンクつける--}}
+                <small>新規会員登録は<a href="#">こちら</a></small>　{{--リンクつける--}}
             </figcaption>
         </figure>
     </div>

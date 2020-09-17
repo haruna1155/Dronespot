@@ -32,7 +32,7 @@ figcaption {
 
 /* footer */
 footer{
-    background-color: #497A92;
+    background-color: #62a5c7;
     font-size:13px;
     text-align: center;
 }
@@ -46,17 +46,6 @@ footer{
     display: block;
     width: 100%;
     height: 200px;
-}
-
-/* show */
-.detail {
-    width: 45rem;
-}
-
-.detail img {
-    width: 80%;
-    height: 70%;
-
 }
 
 
