@@ -13,7 +13,7 @@ class PostsController extends Controller
      */
     public function index()
     {
-        return view('posts.create');
+        return view('user.mypage');
     }
 
     /**
