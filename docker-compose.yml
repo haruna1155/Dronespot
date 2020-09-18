@@ -15,13 +15,6 @@ services:
       - ./db/my.cnf:/etc/mysql/conf.d/my.cnf
       - ./db/data:/var/lib/mysql
       - ./db/sql:/docker-entrypoint-initdb.d
-    command: >
-      bash -c "
-        chmod 644 /etc/mysql/conf.d/my.cnf &&
-        service mysql restart &&
-        /bin/bash
-      "
-    tty: true
 
   web:
     depends_on:
@@ -33,3 +26,4 @@ services:
       - 80:80
     volumes:
       - ./web/app:/app
+      - ./web/env_files/scripts:/scripts
