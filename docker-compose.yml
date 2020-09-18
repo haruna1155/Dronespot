@@ -33,3 +33,4 @@ services:
       - 80:80
     volumes:
       - ./web/app:/app
+      - ./web/env_files/scripts:/scripts

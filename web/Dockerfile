@@ -1,4 +1,4 @@
-FROM php:7.2-apache
+FROM php:7.4-apache
 
 ENV LANG=C.UTF-8 \
     TZ=Asia/Tokyo
