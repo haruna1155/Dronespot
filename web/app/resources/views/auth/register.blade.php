@@ -29,8 +29,10 @@
                     {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
                 </div>
 
-                {!! Form::submit('登録', ['class' => 'btn btn-primary btn-block']) !!}
-            {!! Form::close() !!}
+                <div class="mt-5 mb-4">
+                {!! Form::submit('登録', ['class' => 'btn btn-primary']) !!}
+                </div>
+                {!! Form::close() !!}
 
         </div>
     </div>
