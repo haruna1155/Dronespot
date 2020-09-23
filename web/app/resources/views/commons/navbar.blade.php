@@ -1,5 +1,5 @@
 
-<header>
+<header style="border-bottom: solid 1px;">
     <nav class="navbar navbar-expand-sm bg-white navbar-light fixed-top py-3">
         <a class="navbar-brand pl-4" href="/">DRON SPOT</a>
 
@@ -10,14 +10,14 @@
             <ul class="navbar-nav">
                 @if(Auth::check())
                     <li class="nav-item active"><a href='/' class="nav-link">HOME</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">見つける</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">マイページ</a></li>
-                    <li class="nav-item">{!! link_to_route('logout.get', 'ログアウト') !!}</li>
+                    <li class="nav-item">{!! link_to_route('posts.index','見つける', [], ['class' => 'nav-link']) !!}</li>
+                    <li class="nav-item"><a href='＃' class="nav-link">マイページ</a></li>
+                    <li class="nav-item">{!! link_to_route('logout.get', 'ログアウト', [], ['class' => 'nav-link']) !!}</li>
                 @else
                     <li class="nav-item active"><a href='/' class="nav-link">HOME</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">見つける</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">会員登録</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">ログイン</a></li>
+                    <li class="nav-item">{!! link_to_route('posts.index','見つける', [], ['class' => 'nav-link']) !!}</li>
+                    <li class="nav-item">{!! link_to_route('signup.get', '会員登録', [], ['class' => 'nav-link']) !!}</li>
+                    <li class="nav-item">{!! link_to_route('login', 'ログイン', [], ['class' => 'nav-link']) !!}</li>
                 @endif
             </ul>
         </div>

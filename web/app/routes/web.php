@@ -11,9 +11,12 @@
 |
 */
 
-Route::get('/','PostsController@index');
+Route::get('/','TopPageController@index')->name('welcome');
 
-Route::resource('posts','PostsController');
+//Route::get('/','PostsController@index');
+//Route::group(['middleware' => ['auth']], function () {
+    Route::resource('posts','PostsController');
+//});
 
 // ユーザ登録
 Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
@@ -22,3 +25,5 @@ Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('login.post');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
+
+

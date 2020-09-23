@@ -6,18 +6,35 @@
     </div>
     <div class="main_visual d-flex justify-content-sm-around">
         <figure>
-            <a href="#" class="nav-link"><img src="img/dronespot_2.jpg" alt="見つける"></a>
-            <figcaption>スポット一覧へ</figcaption>
+            <a href="{!! route('posts.index') !!}" class="nav-link">
+                <img src="img/dronespot_2.jpg" alt="見つける"></a>
+            <figcaption>スポット一覧を見る</figcaption>
         </figure>
 
         <figure>
-            <a href="#" class="nav-link"><img src="img/dronespot_1.jpg" alt="共有する"></a>
+            <a href="{!! route('posts.create') !!}" class="nav-link">
+                <img src="img/dronespot_1.jpg" alt="共有する"></a>
             <figcaption>
-                マイページへ<br>
-                <small>新規会員登録は<a href="#">こちら</a></small>　{{--リンクつける--}}
+                スポットを投稿しよう！<br>
+                <small>新規会員登録は{!! link_to_route('signup.get', 'こちら') !!}</small>
             </figcaption>
         </figure>
     </div>
+
+    <style>
+        img {
+            width: 100%;
+            height: 100%;
+        }
+        a:hover {
+            opacity: 0.6;
+            transition-duration: 0.6s;
+        }
+
+        figcaption {
+            text-align: center;
+        }
+    </style>
 
     <div class="mt-5 d-flex justify-content-sm-center">
         <h2>新着スポット</h2>
@@ -29,7 +46,7 @@
     <div class="row mt-3 mb-4">
         <div class="d-flex justify-content-center btn-block">
             <div class="col-sm-5">
-                <a href='#' class="btn btn-success btn-block">スポットをもっと見る</a>
+                {!! link_to_route('posts.index', 'スポットをもっと見る', [], ['class' => 'btn btn-success btn-block']) !!}
             </div>
         </div>
     </div>

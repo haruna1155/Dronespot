@@ -12,20 +12,25 @@
                 <img src=img/test2.jpg alt="posts">{{-- $spot->photo --}}
             </div>
             <div class="card mt-3" style="width: 45rem;">
-                <h5 class="card-header">スポット</h5> {{-- $spot->spot --}}
+                <h5 class="card-header">スポット: {{ $spot->spot }}</h5>
                 <div class="list-group list-group-flush">
-                    <p class="list-group-item">投稿日時:</p> {{-- $spot->created_at --}}
-                    <p class="list-group-item">ユーザー名:</p> {{-- $spot->user --}}
-                    <p class="list-group-item">エリア：</p> {{-- $spot->area --}}
-                    <p class="list-group-item">アクセス：</p> {{-- $spot->access --}}
-                    <p class="list-group-item">ユーザーコメント：</p> {{-- $spot->comment --}}
+                    <p class="list-group-item">投稿日時: {{ $spot->created_at }}</p>
+                    <p class="list-group-item">ユーザー名: {{ $spot->user }}</p>
+                    <p class="list-group-item">エリア： {{ $spot->area }}</p>
+                    <p class="list-group-item">アクセス： {{ $access->access }}</p>
+                    <p class="list-group-item">コメント： {{ $spot->comment }}</p>
                 </div>
                     <div class="card-body d-flex justify-content-end">
-                    {{--@if(Auth::check())--}}
-                    <a href="#" class="btn btn-outline-warning btn-sm"><i class="fas fa-star"></i></a> {{--お気に入り--}}
-                    <a href="#" class="btn btn-outline-success btn-sm"><i class="fas fa-edit"></i></a> {{--編集--}}
-                    <a href="#" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></a> {{--削除--}}
-                    {{-- @endif  --}}
+                    @if(Auth::id() == $post->user_id)
+                    {{--お気に入り--}}
+                    <a href="#" class="btn btn-outline-warning btn-sm"><i class="fas fa-star"></i></a>
+                    {{--編集--}}
+                    {!! link_to_route('posts.edit', '<i class="fas fa-edit"></i>', ['class' => "btn btn-outline-success btn-sm"]) !!}
+                    {{--削除--}}
+                    {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'delete']) !!}
+                        {!! Form::button('<i class="fas fa-trash"></i>', ['class' =>"btn btn-outline-danger btn-sm", 'type' => 'submit']) !!}
+                    {!! Form::close() !!}
+                    @endif
                 </div>
             </div>
         </div>

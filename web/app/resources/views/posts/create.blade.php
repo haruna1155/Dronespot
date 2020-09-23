@@ -63,7 +63,7 @@
             <div class="row mt-3 mb-4">
                 <div class="col-sm">
                     <div class="d-flex justify-content-center btn-block">
-                        {!! Form::button('登録', ['class' => 'btn btn-info']) !!}
+                        {!! Form::submit('登録', ['class' => 'btn btn-info']) !!}
                     </div>
                 </div>
             </div>

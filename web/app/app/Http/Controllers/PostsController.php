@@ -17,8 +17,8 @@ class PostsController extends Controller
     {
         $posts = Post::orderBy('id', 'desc')->paginate(10);
 
-        return view('welcome', [
-            'posts' => $posts,
+        return view('posts.index', [
+           'posts' => $posts,
         ]);
     }
 
@@ -29,11 +29,16 @@ class PostsController extends Controller
      */
     public function create()
     {
-        $post = new Post;
+        if (\Auth::check()) {
 
-        return view('posts.create', [
-            'post' => $post,
-        ]);
+            $post = new Post;
+
+            return view('posts.create', [
+                'post' => $post,
+            ]);
+        } else {
+            return view('auth/login');
+        }
     }
 
     /**
@@ -45,7 +50,7 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'photo' => 'required|mimes:jpeg,bmp,png',
+            'photo' => 'required|file|image|mimes:jpeg,png',
             'spot' => 'required|max:30',
             'area' => 'required',
             'access' => 'required',
@@ -73,14 +78,9 @@ class PostsController extends Controller
     {
         $post = Post::findOrFail($id);
 
-        if (\Auth::id() === $post->user_id) {
-            return view('posts.show', [
-                'post' => $post,
-            ]);
-        } else {
-            return redirect('/');
-        }
-
+        return view('posts.show', [
+            'post' => $post,
+        ]);
     }
 
     /**
@@ -114,6 +114,11 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        if (\Auth::id() === $post->user_id) {
+            $post->delete();
+        }
+        return back();
     }
 }
