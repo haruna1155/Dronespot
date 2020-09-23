@@ -10,7 +10,7 @@
 
             {{--写真--}}
             <div class="form-group row mt-4">
-                {!! Form::label('content', '投稿写真', ['class' => 'col-3']) !!}
+                {!! Form::label('photo', '投稿写真', ['class' => 'col-3']) !!}
                 <div class="col-sm-6">
                     {!! Form::file('photo', null, ['class' => 'form-control']) !!}
                 </div>
@@ -18,7 +18,7 @@
 
             {{--スポット--}}
             <div class="form-group row mt-4">
-                {!! Form::label('content', 'スポット', ['class' => 'col-3']) !!}
+                {!! Form::label('spot', 'スポット', ['class' => 'col-3']) !!}
                 <div class="col-sm-6">
                     {!! Form::text('spot', null, ['class' => 'form-control']) !!}
                 </div>
@@ -26,7 +26,7 @@
 
             {{--エリア--}}
             <div class="form-group row mt-4">
-                {!! Form::label('content', 'エリア', ['class' => 'col-3']) !!}
+                {!! Form::label('area', 'エリア', ['class' => 'col-3']) !!}
                 <div class="col-sm-6">
                     {!! Form::select('area',[
                         '北海道地方' => '北海道地方',
@@ -46,7 +46,7 @@
 
             {{--アクセス--}}
             <div class="form-group row mt-4">
-                {!! Form::label('content', 'アクセス', ['class' => 'col-3']) !!}
+                {!! Form::label('access', 'アクセス', ['class' => 'col-3']) !!}
                 <div class="col-sm-6">
                     {!! Form::text('access', null, ['class' => 'form-control']) !!}
                 </div>
@@ -54,7 +54,7 @@
 
             {{--コメント--}}
             <div class="form-group row mt-4">
-                {!! Form::label('content', 'コメント', ['class' => 'col-3']) !!}
+                {!! Form::label('comment', 'コメント', ['class' => 'col-3']) !!}
                 <div class="col-sm-6">
                     {!! Form::textarea('comment', null, ['class' => 'form-control']) !!}
                 </div>

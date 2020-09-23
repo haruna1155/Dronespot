@@ -44,7 +44,23 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        $post = new Post;
+        $request->validate([
+            'photo' => 'required|mimes:jpeg,bmp,png',
+            'spot' => 'required|max:30',
+            'area' => 'required',
+            'access' => 'required',
+            'comment' => 'required|max300',
+        ]);
+
+        $request->user()->posts()->create([
+            'photo' => $request->photo,
+            'spot' => $request->spot,
+            'area' => $request->area,
+            'access' => $request->access,
+            'comment' => $request->comment,
+        ]);
+
+        return back();
     }
 
     /**
@@ -55,7 +71,16 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        if (\Auth::id() === $post->user_id) {
+            return view('posts.show', [
+                'post' => $post,
+            ]);
+        } else {
+            return redirect('/');
+        }
+
     }
 
     /**
