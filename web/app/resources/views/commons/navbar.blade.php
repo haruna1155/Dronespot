@@ -9,15 +9,47 @@
         <div class="collapse navbar-collapse justify-content-end" id="nav-bar">
             <ul class="navbar-nav">
                 @if(Auth::check())
-                    <li class="nav-item active"><a href='/' class="nav-link">HOME</a></li>
-                    <li class="nav-item">{!! link_to_route('posts.index','見つける', [], ['class' => 'nav-link']) !!}</li>
-                    <li class="nav-item"><a href='＃' class="nav-link">マイページ</a></li>
-                    <li class="nav-item">{!! link_to_route('logout.get', 'ログアウト', [], ['class' => 'nav-link']) !!}</li>
+                    <li class="nav-item">
+                        <a href='/' class="nav-link {{ request()->is('/') ? 'active' : '' }}">
+                            HOME
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('posts.index')}}" class="nav-link {{Request::routeIs('posts.index') ? 'active' : '' }}">
+                            見つける
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('users.mypage')}}" class="nav-link {{Request::routeIs('users.mypage') ? 'active' : '' }}">
+                            マイページ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('logout.get')}}" class="nav-link {{Request::routeIs('logout.get') ? 'active' : '' }}">
+                            ログアウト
+                        </a>
+                    </li>
                 @else
-                    <li class="nav-item active"><a href='/' class="nav-link">HOME</a></li>
-                    <li class="nav-item">{!! link_to_route('posts.index','見つける', [], ['class' => 'nav-link']) !!}</li>
-                    <li class="nav-item">{!! link_to_route('signup.get', '会員登録', [], ['class' => 'nav-link']) !!}</li>
-                    <li class="nav-item">{!! link_to_route('login', 'ログイン', [], ['class' => 'nav-link']) !!}</li>
+                    <li class="nav-item">
+                        <a href='/' class="nav-link {{ request()->is('/') ? 'active' : '' }}">
+                            HOME
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('posts.index')}}" class="nav-link {{Request::routeIs('posts.index') ? 'active' : '' }}">
+                            見つける
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('signup.get')}}" class="nav-link {{Request::routeIs('signup.get') ? 'active' : '' }}">
+                            会員登録
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('login')}}" class="nav-link {{Request::routeIs('login') ? 'active' : '' }}">
+                            ログイン
+                        </a>
+                    </li>
                 @endif
             </ul>
         </div>
