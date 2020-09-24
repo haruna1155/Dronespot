@@ -26,19 +26,19 @@
 
             {{--エリア--}}
             <div class="form-group row mt-4">
-                {!! Form::label('area', 'エリア', ['class' => 'col-3']) !!}
+                {!! Form::label('area_id', 'エリア', ['class' => 'col-3']) !!}
                 <div class="col-sm-6">
-                    {!! Form::select('area',[
-                        '北海道地方' => '北海道地方',
-                        '東北地方' => '東北地方',
-                        '関東地方' => '関東地方',
-                        '中部地方' => '中部地方',
-                        '近畿地方' => '近畿地方',
-                        '中国地方' => '中国地方',
-                        '四国地方' => '四国地方',
-                        '九州地方' => '九州地方',
-                        '沖縄地方' => '沖縄地方'],
-                        old('area'),
+                    {!! Form::select('area_id',[
+                        '1' => '北海道地方',
+                        '2' => '東北地方',
+                        '3' => '関東地方',
+                        '4' => '中部地方',
+                        '5' => '近畿地方',
+                        '6' => '中国地方',
+                        '7' => '四国地方',
+                        '8' => '九州地方',
+                        '9' => '沖縄地方'],
+                        old('area_id'),
                         ['class' => 'form-control' ,'placeholder' => '〇〇地方'])
                     !!}
                 </div>
@@ -64,6 +64,10 @@
                 <div class="col-sm">
                     <div class="d-flex justify-content-center btn-block">
                         {!! Form::submit('登録', ['class' => 'btn btn-info']) !!}
+                        <a href="javascript:history.back()" class="btn btn-secondary ml-2">
+                            戻る
+                        </a>
+
                     </div>
                 </div>
             </div>

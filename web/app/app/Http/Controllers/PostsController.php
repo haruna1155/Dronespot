@@ -52,15 +52,15 @@ class PostsController extends Controller
         $request->validate([
             'photo' => 'required|file|image|mimes:jpeg,png',
             'spot' => 'required|max:30',
-            'area' => 'required',
+            'area_id' => 'required',
             'access' => 'required',
-            'comment' => 'required|max300',
+            'comment' => 'required|max:300',
         ]);
 
         $request->user()->posts()->create([
             'photo' => $request->photo,
             'spot' => $request->spot,
-            'area' => $request->area,
+            'area_id' => $request->area_id,
             'access' => $request->access,
             'comment' => $request->comment,
         ]);
@@ -77,7 +77,9 @@ class PostsController extends Controller
     public function show($id)
     {
         $user =\Auth::user();
+        $user->loadRelationshipCounts();
         $post = Post::findOrFail($id);
+
 
         return view('posts.show', [
             'post' => $post,
@@ -93,7 +95,16 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        if(\Auth::id() === $post->user_id) {
+            return view('posts.edit', [
+                'post' => $post,
+            ]);
+        } else {
+            return redirect ('/');
+        }
+
     }
 
     /**
@@ -105,7 +116,29 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            //'photo' => 'required|file|image|mimes:jpeg,png',
+            'spot' => 'required|max:30',
+            'area_id' => 'required',
+            'access' => 'required',
+            'comment' => 'required|max:300',
+        ]);
+
+        $post = Post::findOrFail($id);
+        $user =\Auth::user();
+
+        if(\Auth::id() === $post->user_id) {
+            //$post->photo = $request->photo;
+            $post->spot = $request->spot;
+            $post->area_id = $request->area_id;
+            $post->access = $request->access;
+            $post->comment = $request->comment;
+            $post->save();
+            }
+        return view('posts.show', [
+            'post' => $post,
+            'user' => $user,
+        ]);
     }
 
     /**
