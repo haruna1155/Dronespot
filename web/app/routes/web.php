@@ -26,8 +26,3 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 Route::get('mypage','UsersController@mypage')->name('users.mypage');
 //Route::resouce('users', 'UsersController');
-
-Route::get('posts/{name?}', function ($name = null) {
-    return $neme;
-});
-

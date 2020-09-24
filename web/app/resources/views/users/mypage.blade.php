@@ -20,19 +20,12 @@
 
     </div>
 
-
-    {{--<div class="d-flex justify-content-center btn-block">
-        <div class="col-sm-6">
-            {!! link_to_route('posts.create', 'スポットを共有しよう', [], ['class' => "btn btn-info btn-block btn-lg"]) !!}
-        </div>
-    </div> --}}
-
     <br>
     <br>
 
     <ul class="nav nav-tabs nav-justified mb-3">
         <li class="nav-item">
-            <a href="{{route('users.mypage')}}" class="nav-link {{Request::routeIs('users.mypage') ? 'active' : '' }}" >
+            <a href="{{route('users.mypage') }}" class="nav-link {{Request::routeIs('users.mypage') ? 'active' : '' }}" >
                 スポット
             </a>
         </li>

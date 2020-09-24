@@ -76,10 +76,12 @@ class PostsController extends Controller
      */
     public function show($id)
     {
+        $user =\Auth::user();
         $post = Post::findOrFail($id);
 
         return view('posts.show', [
             'post' => $post,
+            'user' => $user,
         ]);
     }
 
