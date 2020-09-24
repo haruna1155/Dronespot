@@ -6,6 +6,7 @@
             background-color: #62a5c7;
             font-size:13px;
             text-align: center;
+            margin-top: auto;
         }
     </style>
 

@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
     </head>
 
-    <body style="padding-top:4.5rem;">
+    <body style="padding-top:4.5rem; display: flex; flex-flow: column; min-height: 100vh;">
 
     {{-- ナビゲーションバー --}}
     @include('commons.navbar')
