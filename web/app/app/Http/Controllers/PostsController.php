@@ -29,16 +29,11 @@ class PostsController extends Controller
      */
     public function create()
     {
-        if (\Auth::check()) {
-
             $post = new Post;
 
             return view('posts.create', [
                 'post' => $post,
             ]);
-        } else {
-            return view('auth/login');
-        }
     }
 
     /**
@@ -77,7 +72,7 @@ class PostsController extends Controller
     public function show($id)
     {
         $user =\Auth::user();
-        $user->loadRelationshipCounts();
+
         $post = Post::findOrFail($id);
 
 
@@ -154,6 +149,6 @@ class PostsController extends Controller
         if (\Auth::id() === $post->user_id) {
             $post->delete();
         }
-        return back();
+        return view('posts.show');
     }
 }

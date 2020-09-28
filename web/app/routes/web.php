@@ -14,9 +14,8 @@
 use App\Http\Controllers\UsersController;
 
 Route::get('/','TopPageController@index')->name('welcome');
-Route::resource('posts','PostsController');
+Route::resource('/posts', 'PostsController');
 
-Route::get('mypage','UsersController@mypage')->name('users.mypage');
 
 
 // ユーザ登録
@@ -25,7 +24,17 @@ Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
 // 認証
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('login', 'Auth\LoginController@login')->name('login.post');
-Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
+    Route::get('mypage','UsersController@mypage')->name('users.mypage');
+});
+
+Route::group(['middleware' => ['auth']], function () {
+    Route::group(['prefix' => 'users/{id}'], function() {
+        Route::get('favorites', 'UsersController@favorites')->name('users.favorites');
+    });
+});
 
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'posts/{id}'], function () {

@@ -18,14 +18,14 @@
         </div>
     </div>
 
-    <div class="mt-2 mb-3">
-        <ul class="nav nav-tabs nav-justified" id="list-tab">
+    <div class="mt-2 mb-3  nav-justified">
+        <ul class="nav nav-tabs" id="list-tab">
             <li><a href="{{ route('users.mypage') }}" data-toggle="tab"
             class="nav-item nav-link {{ Request::routeIs('users.mypage') ? 'active' : '' }}">
                 スポット
             </a></li>
-            <li><a href="{{ route('favorite', ['id' => $user->id]) }}" data-toggle="tab"
-            class="nav-item nav-link {{ Request::routeIs('favorite') ? 'active' : '' }}">
+            <li><a href="{{ route('users.favorites', ['id' => $user->id]) }}" data-toggle="tab"
+            class="nav-item nav-link {{ Request::routeIs('users.favorites') ? 'active' : '' }}">
                 お気に入り
             </a></li>
         </ul>
@@ -35,9 +35,9 @@
                     @include('posts.posts')
                 </div>
 
-                <div class="tab-pane" id="nav-favorite">
+                {{-- <div class="tab-pane" id="nav-favorite">
                     @include('users.favorites')
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
