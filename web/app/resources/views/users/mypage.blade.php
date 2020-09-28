@@ -19,23 +19,25 @@
     </div>
 
     <div class="mt-2 mb-3">
-        <div class="nav nav-tabs nav-justified" id="list-tab">
-            <a href="{{ route('users.mypage') }}" data-toggle="tab"
-            class="nav-item nav-link {{Request::routeIs('users.mypage') ? 'active' : '' }}">
+        <ul class="nav nav-tabs nav-justified" id="list-tab">
+            <li><a href="{{ route('users.mypage') }}" data-toggle="tab"
+            class="nav-item nav-link {{ Request::routeIs('users.mypage') ? 'active' : '' }}">
                 スポット
-            </a>
-            <a href="#" class="nav-item nav-link" data-toggle="tab">
+            </a></li>
+            <li><a href="{{ route('favorite', ['id' => $user->id]) }}" data-toggle="tab"
+            class="nav-item nav-link {{ Request::routeIs('favorite') ? 'active' : '' }}">
                 お気に入り
-            </a>
-        </div>
+            </a></li>
+        </ul>
         <div class="row col-9">
-            <div class="tab-content" id="nav-tabContent" style="width:100%;">
-                <div class="tab-pane active " id="nav-spot">
+            <div class="tab-content" style="width:100%;">
+                <div class="tab-pane active" id="nav-spot">
                     @include('posts.posts')
                 </div>
-            </div>
-        </div>
-            <div class="tab-pane" id="nav-favorite">
+
+                <div class="tab-pane" id="nav-favorite">
+                    @include('users.favorites')
+                </div>
             </div>
         </div>
     </div>

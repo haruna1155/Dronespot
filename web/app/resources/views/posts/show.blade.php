@@ -23,7 +23,7 @@
                     <div class="card-body d-flex justify-content-end">
                     @if(Auth::id() == $post->user_id)
                     {{--お気に入り--}}
-                    <a href="#" class="btn btn-outline-warning btn-sm"><i class="fas fa-star"></i></a>
+                    @include('commons.favorite_button')
                     {{--編集--}}
                     <a href="{{ route('posts.edit', ['post' => $post->id]) }}" class="btn btn-outline-success btn-sm">
                         <i class="fas fa-edit"></i>

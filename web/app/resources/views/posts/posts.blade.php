@@ -17,13 +17,13 @@
                     <li class="list-group-item">アクセス：{{ $post->access }}</li>
                 </ul>
 
-                <div class="row mt-1 mb-1 d-flex justify-content-around">
+                <div class="mt-1 mb-1 d-flex justify-content-center">
                     @if(Auth::check())
                         <div class="btn-group">
                             <a href="{{ route('posts.show', ['post' => $post->id]) }}" class='btn btn-outline-info btn-sm'>
                                 詳細を見る
                             </a>
-                            <a href="#" class="btn btn-outline-warning btn-sm"><i class="fas fa-star"></i></a>
+                            @include('commons.favorite_button')
                         </div>
                     @else
                         <div class="btn-group">
