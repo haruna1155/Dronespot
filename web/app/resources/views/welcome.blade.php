@@ -5,20 +5,20 @@
         <h2>新しい景色を見つけよう</h2>
     </div>
     <div class="main_visual d-flex justify-content-sm-around">
-        <figure>
+        <div>
             <a href="{!! route('posts.index') !!}" class="nav-link">
                 <img src="img/dronespot_2.jpg" alt="見つける"></a>
-            <figcaption>スポット一覧を見る</figcaption>
-        </figure>
+            <p class="text-center">スポット一覧を見る</p>
+        </div>
 
-        <figure>
+        <div>
             <a href="{!! route('posts.create') !!}" class="nav-link">
                 <img src="img/dronespot_1.jpg" alt="共有する"></a>
-            <figcaption>
+            <p class="text-center">
                 スポットを投稿しよう！<br>
                 <small>新規会員登録は{!! link_to_route('signup.get', 'こちら') !!}</small>
-            </figcaption>
-        </figure>
+            </p>
+        </div>
     </div>
 
     <style>

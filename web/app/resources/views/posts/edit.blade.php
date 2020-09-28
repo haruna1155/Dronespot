@@ -5,7 +5,7 @@
     <h2>スポットの編集</h2>
 </div>
 
-<div class="mt-4">
+<div class="mt-4 mb-3">
     {!! Form::model($post,['route' => ['posts.update', $post->id], 'method' => 'put']) !!}
 
 

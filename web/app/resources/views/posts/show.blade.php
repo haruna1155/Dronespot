@@ -8,8 +8,8 @@
 
     <div class="container">
         <div class="row d-flex justify-content-sm-center">
-            <div class="post-photo" style="width: 600px">
-                <img src={{ $post->photo }}alt="posts">
+            <div class="post-photo text-center" style="width: 90%">
+                <img src={{ $post->photo }} alt="posts" style="max-width:90%; max-hight:90%;">
             </div>
             <div class="card mt-3" style="width: 45rem;">
                 <h5 class="card-header">スポット: {{ $post->spot }}</h5>
