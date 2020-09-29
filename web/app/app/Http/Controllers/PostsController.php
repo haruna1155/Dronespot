@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Post;
+use App\Area;
 
 class PostsController extends Controller
 {
@@ -30,9 +32,14 @@ class PostsController extends Controller
     public function create()
     {
             $post = new Post;
+            $areas = config('const');
+            foreach (Area::all() as $area) {
+                $area[$area->id] = $area->name;
+            }
 
             return view('posts.create', [
                 'post' => $post,
+                'areas' => $areas,
             ]);
     }
 
@@ -47,20 +54,25 @@ class PostsController extends Controller
         $request->validate([
             'photo' => 'required|file|image|mimes:jpeg,png',
             'spot' => 'required|max:30',
-            'area_id' => 'required',
+            'area' => 'required',
             'access' => 'required',
             'comment' => 'required|max:300',
         ]);
 
-        $request->user()->posts()->create([
-            'photo' => $request->photo,
-            'spot' => $request->spot,
-            'area_id' => $request->area_id,
-            'access' => $request->access,
-            'comment' => $request->comment,
-        ]);
+        //ユーザーIDを取得
+        $user_id = Auth::id();
 
-        return back();
+        // 画像を保存、パスを取得
+        $photo_url = Post::putPhoto($user_id, $request->file('photo'));
+
+        // DBに保存
+        $post = new Post($request->post());
+        $post->user_id = $user_id;
+        $post->area_id = $request->post()['area'];
+        $post->photo = $photo_url;
+        $post->save();
+
+        return redirect(route('posts.show', ['post' => $post]));
     }
 
     /**
@@ -72,7 +84,6 @@ class PostsController extends Controller
     public function show($id)
     {
         $user =\Auth::user();
-
         $post = Post::findOrFail($id);
 
 
@@ -123,9 +134,8 @@ class PostsController extends Controller
         $user =\Auth::user();
 
         if(\Auth::id() === $post->user_id) {
-            //$post->photo = $request->photo;
             $post->spot = $request->spot;
-            $post->area_id = $request->area_id;
+            $post->area_id = $request->post()['area'];
             $post->access = $request->access;
             $post->comment = $request->comment;
             $post->save();
@@ -149,6 +159,6 @@ class PostsController extends Controller
         if (\Auth::id() === $post->user_id) {
             $post->delete();
         }
-        return view('posts.show');
+        return back();
     }
 }

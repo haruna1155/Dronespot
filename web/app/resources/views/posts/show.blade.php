@@ -16,7 +16,7 @@
                 <div class="list-group list-group-flush">
                     <p class="list-group-item">投稿日時: {{ $post->created_at }}</p>
                     <p class="list-group-item">ユーザー名: {{ $user->name }}</p>
-                    <p class="list-group-item">エリア： {{ $post->area_id }}</p>
+                    <p class="list-group-item">エリア： {{ $post->area->name }}</p>
                     <p class="list-group-item">アクセス： {{ $post->access }}</p>
                     <p class="list-group-item">コメント： {{ $post->comment }}</p>
                 </div>

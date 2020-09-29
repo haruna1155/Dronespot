@@ -27,7 +27,7 @@ class UsersTableSeeder extends Seeder
             'user_id' => '1',
             'photo' => 'https://img-cdn.guide.travel.co.jp/article/999/31206/6E27665A71E34BA2B52CDB816ECBB6EE_LL.jpg',
             'spot' => '××海',
-            'area_id' => '5',
+            'area_id' => '4',
             'access' => '滋賀県',
             'comment' => '綺麗でした。',
             'created_at' => date('Y-m-d H:i:s'),

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     protected $fillable = [
-        'photo','spot', 'area', 'access', 'comment',
+        'photo','spot', 'access', 'comment',
     ];
 
     public function user() {
@@ -17,4 +17,10 @@ class Post extends Model
     public function favorite_users() {
         return $this->belongsToMany(User::class,'favorites','post_id','user_id')->withTimestamps();
     }
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
+    }
+
 }
