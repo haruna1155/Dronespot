@@ -15,12 +15,25 @@ class PostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $posts = Post::orderBy('id', 'desc')->paginate(10);
+        $areas = config('const.AREAS');
+        foreach (Area::all() as $area) {
+            $area[$area->id] = $area->name;
+        }
+
+        $query = Post::query();
+        //検索した地域を取得
+        $search_area = $request->input('area');
+        //一致するカラムを取得
+        if ($request->has('area') && $search_area != ('地方別検索')) {
+            $query->where('area', $search_area)->get();
+        }
 
         return view('posts.index', [
            'posts' => $posts,
+           'areas' => $areas,
         ]);
     }
 
