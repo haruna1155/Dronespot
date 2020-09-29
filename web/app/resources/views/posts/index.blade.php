@@ -24,6 +24,7 @@
     </div>
 
     {{-- 投稿一覧 --}}
-            @include('posts.posts')
+            @include('posts.posts', ['size' => 'lg'])
+            {{ $posts->links() }}
 
 @endsection

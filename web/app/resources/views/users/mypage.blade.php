@@ -19,28 +19,32 @@
     </div>
 
     <div class="mt-2 mb-3  nav-justified">
-        <ul class="nav nav-tabs" id="list-tab">
-            <li><a href="{{ route('users.mypage') }}" data-toggle="tab"
-            class="nav-item nav-link {{ Request::routeIs('users.mypage') ? 'active' : '' }}">
-                スポット
-            </a></li>
-            <li><a href="{{ route('users.favorites', ['id' => $user->id]) }}" data-toggle="tab"
-            class="nav-item nav-link {{ Request::routeIs('users.favorites') ? 'active' : '' }}">
-                お気に入り
-            </a></li>
+        <ul class="nav nav-tabs" id="list-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="my-posts-tab" data-toggle="tab" href="#my-posts" role="tab" aria-controls="my-posts" aria-selected="true">
+                    スポット
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="my-favorites-tab" data-toggle="tab" href="#my-favorites" role="tab" aria-controls="my-favorites" aria-selected="false">
+                    お気に入り
+                </a>
+            </li>
         </ul>
-        <div class="row col-9">
-            <div class="tab-content" style="width:100%;">
-                <div class="tab-pane active" id="nav-spot">
-                    @include('posts.posts')
-                </div>
-
-                {{-- <div class="tab-pane" id="nav-favorite">
-                    @include('users.favorites')
-                </div> --}}
+        <div class="tab-content">
+            <div class="tab-pane show active" id="my-posts" role="tabpanel" aria-labelledby="my-posts-tab">
+                {{-- TODO: 自分が投稿したスポットを渡す --}}
+                {{-- 例： @include('posts.posts', ['posts' => $myPosts, 'size' => 'lg']) --}}
+                @include('posts.posts', ['size' => 'lg'])
+            </div>
+            <div class="tab-pane" id="my-favorites" role="tabpanel" aria-labelledby="my-favorites-tab">
+                {{-- TODO: お気に入り一覧を渡す --}}
+                {{-- 例： @include('posts.posts', ['posts' => $myFavorites, 'size' => 'lg']) --}}
+                @include('posts.posts', ['size' => 'lg'])
             </div>
         </div>
     </div>
+    {{ $posts->links() }}
 
     <style>
         a:hover {

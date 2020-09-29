@@ -26,9 +26,9 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
         $user->loadRelationshipCounts();
-        $favorites = $user->favorites()->paginate(10);
+        $favorites = $user->favorite()->orderBy('created_at', 'desc')->paginate(10);
 
-        return view("users.favorites", [
+        return view('users.mypage', [
             'user' => $user,
             'posts' => $favorites,
         ]);
