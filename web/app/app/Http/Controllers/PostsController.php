@@ -45,9 +45,9 @@ class PostsController extends Controller
     public function create()
     {
             $post = new Post;
-            $areas = config('const');
+            $areas = [];
             foreach (Area::all() as $area) {
-                $area[$area->id] = $area->name;
+                $areas[$area->id] = $area->name;
             }
 
             return view('posts.create', [
