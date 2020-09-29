@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class AreasTableSeeder extends Seeder
 {
@@ -17,10 +18,7 @@ class AreasTableSeeder extends Seeder
     private function isnertAreas()
     {
         foreach (config('const.AREAS') as $id => $name) {
-            DB::table('areas')->insert([
-                'id' => $id,
-                'name' => $name,
-            ]);
+            DB::table('areas')->insert(compact('id', 'name'));
         }
     }
 }
