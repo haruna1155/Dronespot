@@ -19,9 +19,9 @@ class CreatePostsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->string('photo');
-            $table->string('spot',30);
+            $table->string('spot', 30);
             $table->unsignedBigInteger('area_id');
-            $table->string('access',30);
+            $table->string('access', 30);
             $table->text('comment');
             $table->timestamps();
 
