@@ -6,7 +6,7 @@
     </div>
 
     <div class="mt-4">
-        {!! Form::model($post,['route' => 'posts.store']) !!}
+        {!! Form::model($post,['route' => 'posts.store', 'files' => true]) !!}
 
             {{--写真--}}
             <div class="form-group row mt-4">
@@ -28,19 +28,7 @@
             <div class="form-group row mt-4">
                 {!! Form::label('area_id', 'エリア', ['class' => 'col-3']) !!}
                 <div class="col-sm-6">
-                    {!! Form::select('area_id',[
-                        '1' => '北海道地方',
-                        '2' => '東北地方',
-                        '3' => '関東地方',
-                        '4' => '中部地方',
-                        '5' => '近畿地方',
-                        '6' => '中国地方',
-                        '7' => '四国地方',
-                        '8' => '九州地方',
-                        '9' => '沖縄地方'],
-                        old('area_id'),
-                        ['class' => 'form-control' ,'placeholder' => '〇〇地方'])
-                    !!}
+                    {!! Form::select('area', $areas, old('area'), ['class' => 'form-control' ,'placeholder' => '〇〇地方']) !!}
                 </div>
             </div>
 

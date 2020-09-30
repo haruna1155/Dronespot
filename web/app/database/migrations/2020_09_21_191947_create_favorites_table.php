@@ -13,6 +13,8 @@ class CreateFavoritesTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('favorites');
+
         Schema::create('favorites', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');

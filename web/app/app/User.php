@@ -37,20 +37,22 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function posts() {
+    public function posts()
+    {
         return $this->hasMany(Post::class);
     }
 
-    public function favorites() {
-        return $this->belongsTomany(Post::class,'favorites', 'user_id', 'post_id')->withTimestamps();
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
     }
 
     public function favorite($postId)
     {
         //お気に入りしているかどうか
-        $exist=$this->is_favorites($postId);
+        $exist = $this->is_favorites($postId);
         //自分の投稿かどうか
-        $its_me=$this->id==$postId;
+        $its_me = $this->id == $postId;
 
         if ($exist || $its_me) {
             return false;
@@ -63,9 +65,9 @@ class User extends Authenticatable
     public function unfavorite($postId)
     {
         //お気に入りしているかどうか
-        $exist=$this->is_favorites($postId);
+        $exist = $this->is_favorites($postId);
         //自分の投稿かどうか
-        $its_me=$this->id==$postId;
+        $its_me = $this->id == $postId;
 
         if ($exist && $its_me) {
             return true;
@@ -77,12 +79,12 @@ class User extends Authenticatable
 
     public function is_favorites($postId)
     {
-        return $this->favorites()->where("post_id",$postId)->exists();
+        return $this->favorites()->where("post_id", $postId)->exists();
     }
 
 
-    public function loadRelationshipCounts() {
-        $this->loadCount('posts','favorites');
-
+    public function loadRelationshipCounts()
+    {
+        $this->loadCount('posts', 'favorites');
     }
 }
