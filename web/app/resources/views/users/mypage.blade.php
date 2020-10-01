@@ -6,12 +6,12 @@
     </div>
 
     <div class="row col-3" style="float: left;">
-        <div class="mt-2 mb-4 mr-2 ml-0">
+        <div class="mt-2 mb-4 mr-3 ml-0">
             <a href="{!! route('posts.create') !!}" class="side">
                 <img src="img/dronespot_3.jpg" alt="新規投稿"  style="max-width: 100%;">
             </a>
         </div>
-        <div class="mt-2 mb-4">
+        <div class="mt-2 mb-4 mr-3 ml-0">
             <a href="{!! route('posts.index') !!}" class="side" >
                 <img src="img/dronespot_4.jpg" alt="投稿一覧" style="max-width: 100%;">
             </a>
@@ -35,16 +35,25 @@
             <div class="tab-pane show active" id="my-posts" role="tabpanel" aria-labelledby="my-posts-tab">
                 {{-- TODO: 自分が投稿したスポットを渡す --}}
                 {{-- 例： @include('posts.posts', ['posts' => $myPosts, 'size' => 'lg']) --}}
-                @include('posts.posts', ['size' => 'lg'])
+                <div class="row justify-content-center">
+                    @include('posts.posts', ['size' => 'lg'])
+                    <div class="mt-3">
+                        {{ $posts->links() }}
+                    </div>
+                </div>
             </div>
             <div class="tab-pane" id="my-favorites" role="tabpanel" aria-labelledby="my-favorites-tab">
                 {{-- TODO: お気に入り一覧を渡す --}}
                 {{-- 例： @include('posts.posts', ['posts' => $myFavorites, 'size' => 'lg']) --}}
-                @include('posts.posts', ['size' => 'lg'])
+                <div class="row justify-content-center">
+                    @include('posts.posts', ['size' => 'lg'])
+                    <div class="mt-3">
+                        {{ $posts->links() }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    {{ $posts->links() }}
 
     <style>
         a:hover {
