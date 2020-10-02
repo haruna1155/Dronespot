@@ -23,9 +23,9 @@ class PostsController extends Controller
             $area[$area->id] = $area->name;
         }
 
-        $query = Post::query();
         //検索した地域を取得
         $search_area = $request->input('area');
+        $query = Area::query();
         //一致するカラムを取得
         if ($request->has('area') && $search_area != ('地方別検索')) {
             $query->where('area', $search_area)->get();
