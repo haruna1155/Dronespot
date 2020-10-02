@@ -14,8 +14,12 @@
     </div>
 
 
+
     {{-- 投稿一覧 --}}
-            @include('posts.posts', ['size' => 'lg'])
-            {{ $posts->links() }}
+    @include('posts.posts', ['size' => 'lg'])
+
+    <div class="mt-3 mb-2 row justify-content-center">
+        {{ $posts->links() }}
+    </div>
 
 @endsection
