@@ -46,7 +46,7 @@ class PostsController extends Controller
     {
         $post = new Post;
         $areas = [];
-        foreach (Area::all() as $area) {
+        foreach (Area::orderBy('id')->get() as $area) {
             $areas[$area->id] = $area->name;
         }
 
