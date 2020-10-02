@@ -32,8 +32,8 @@ class PostsController extends Controller
         }
 
         return view('posts.index', [
-           'posts' => $posts,
-           'areas' => $areas,
+            'posts' => $posts,
+            'areas' => $areas,
         ]);
     }
 
@@ -44,16 +44,16 @@ class PostsController extends Controller
      */
     public function create()
     {
-            $post = new Post;
-            $areas = [];
-            foreach (Area::all() as $area) {
-                $areas[$area->id] = $area->name;
-            }
+        $post = new Post;
+        $areas = [];
+        foreach (Area::orderBy('id')->get() as $area) {
+            $areas[$area->id] = $area->name;
+        }
 
-            return view('posts.create', [
-                'post' => $post,
-                'areas' => $areas,
-            ]);
+        return view('posts.create', [
+            'post' => $post,
+            'areas' => $areas,
+        ]);
     }
 
     /**
@@ -96,7 +96,7 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        $user =\Auth::user();
+        $user = \Auth::user();
         $post = Post::findOrFail($id);
 
 
@@ -116,14 +116,13 @@ class PostsController extends Controller
     {
         $post = Post::findOrFail($id);
 
-        if(\Auth::id() === $post->user_id) {
+        if (\Auth::id() === $post->user_id) {
             return view('posts.edit', [
                 'post' => $post,
             ]);
         } else {
-            return redirect ('/');
+            return redirect('/');
         }
-
     }
 
     /**
@@ -144,15 +143,15 @@ class PostsController extends Controller
         ]);
 
         $post = Post::findOrFail($id);
-        $user =\Auth::user();
+        $user = \Auth::user();
 
-        if(\Auth::id() === $post->user_id) {
+        if (\Auth::id() === $post->user_id) {
             $post->spot = $request->spot;
             $post->area_id = $request->post()['area'];
             $post->access = $request->access;
             $post->comment = $request->comment;
             $post->save();
-            }
+        }
         return view('posts.show', [
             'post' => $post,
             'user' => $user,

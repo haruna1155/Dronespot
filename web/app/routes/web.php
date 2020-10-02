@@ -28,15 +28,16 @@ Route::post('/signup', 'Auth\RegisterController@register')->name('signup.post');
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login', 'Auth\LoginController@login')->name('login.post');
 
+<<<<<<< Updated upstream
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'users/{id}'], function() {
         Route::get('/favorites', 'UsersController@favorites')->name('users.favorites');
     });
 });
 
+=======
+>>>>>>> Stashed changes
 Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'posts/{id}'], function () {
-        Route::post('/favorite', 'FavoritesController@store')->name('favorite');
-        Route::delete('/unfavorite', 'FavoritesController@destroy')->name('unfavorite');
     });
 });
