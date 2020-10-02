@@ -33,7 +33,7 @@ class PostsTableSeeder extends Seeder
                 'user_id' => '1',
                 'photo' => '/img/demo_data/yokonaga.png',
                 'spot' => '××公園',
-                'area_id' => '5',
+                'area_id' => '1',
                 'access' => '京都府',
                 'comment' => '綺麗でした。',
             ],
@@ -41,7 +41,7 @@ class PostsTableSeeder extends Seeder
                 'user_id' => '1',
                 'photo' => '/img/demo_data/tatenaga.png',
                 'spot' => '××海',
-                'area_id' => '4',
+                'area_id' => '2',
                 'access' => '滋賀県',
                 'comment' => '綺麗でした。',
             ],
@@ -49,10 +49,37 @@ class PostsTableSeeder extends Seeder
                 'user_id' => '1',
                 'photo' => '/img/demo_data/square.png',
                 'spot' => '屋上',
-                'area_id' => '1',
+                'area_id' => '3',
                 'access' => '東京',
                 'comment' => 'おすすめスポット！',
             ],
+            [
+                'user_id' => '1',
+                'photo' => '/img/demo_data/square.png',
+                'spot' => '屋上',
+                'area_id' => '3',
+                'access' => '東京',
+                'comment' => 'おすすめスポット！',
+            ],
+            [
+                'user_id' => '1',
+                'photo' => '/img/demo_data/square.png',
+                'spot' => '屋上',
+                'area_id' => '4',
+                'access' => '東京',
+                'comment' => 'おすすめスポット！',
+            ],
+            [
+                'user_id' => '1',
+                'photo' => '/img/demo_data/square.png',
+                'spot' => '屋上',
+                'area_id' => '5',
+                'access' => '東京',
+                'comment' => 'おすすめスポット！',
+            ],
+
+
+
         ];
     }
 
@@ -63,15 +90,7 @@ class PostsTableSeeder extends Seeder
                 'user_id' => '2',
                 'photo' => '/img/demo_data/yokonaga.png',
                 'spot' => '屋上',
-                'area_id' => '9',
-                'access' => '東京',
-                'comment' => 'おすすめスポット！',
-            ],
-            [
-                'user_id' => '2',
-                'photo' => '/img/demo_data/yokonaga.png',
-                'spot' => '屋上',
-                'area_id' => '3',
+                'area_id' => '6',
                 'access' => '東京',
                 'comment' => 'おすすめスポット！',
             ],
@@ -83,6 +102,23 @@ class PostsTableSeeder extends Seeder
                 'access' => '東京',
                 'comment' => 'おすすめスポット！',
             ],
+            [
+                'user_id' => '2',
+                'photo' => '/img/demo_data/yokonaga.png',
+                'spot' => '屋上',
+                'area_id' => '8',
+                'access' => '東京',
+                'comment' => 'おすすめスポット！',
+            ],
+            [
+                'user_id' => '2',
+                'photo' => '/img/demo_data/yokonaga.png',
+                'spot' => '屋上',
+                'area_id' => '9',
+                'access' => '東京',
+                'comment' => 'おすすめスポット！',
+            ],
+
         ];
     }
 }

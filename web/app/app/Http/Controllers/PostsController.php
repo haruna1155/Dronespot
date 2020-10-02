@@ -23,9 +23,9 @@ class PostsController extends Controller
             $area[$area->id] = $area->name;
         }
 
-        $query = Post::query();
         //検索した地域を取得
         $search_area = $request->input('area');
+        $query = Area::query();
         //一致するカラムを取得
         if ($request->has('area') && $search_area != ('地方別検索')) {
             $query->where('area', $search_area)->get();
@@ -65,7 +65,7 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'photo' => 'required|file|image|mimes:jpeg,png',
+            'photo' => 'required|file|image|mimes:jpeg, jpg, png',
             'spot' => 'required|max:30',
             'area' => 'required',
             'access' => 'required',
@@ -171,6 +171,6 @@ class PostsController extends Controller
         if (\Auth::id() === $post->user_id) {
             $post->delete();
         }
-        return back();
+        return redirect('/');
     }
 }
