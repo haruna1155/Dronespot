@@ -103,6 +103,15 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'name' => '名前',
+        'email' => 'メール',
+        'password' => 'パスワード',
+        'photo' => '投稿写真',
+        'spot' => 'スポット',
+        'area' => 'エリア',
+        'access' => 'アクセス',
+        'comment' => 'コメント',
+    ],
 
 ];
