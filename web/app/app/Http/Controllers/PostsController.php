@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use App\Post;
 use App\Area;
@@ -17,24 +18,32 @@ class PostsController extends Controller
      */
     public function index(Request $request)
     {
-        $posts = Post::orderBy('id', 'desc')->paginate(10);
-        $areas = config('const.AREAS');
-        foreach (Area::all() as $area) {
-            $area[$area->id] = $area->name;
+        // エリア一覧を取得
+        $areas = [];
+        foreach (Area::orderBy('id')->get() as $area) {
+            $areas[$area->id] = $area->name;
         }
 
-        //検索した地域を取得
+        // 全件取得用クエリを設定
+        $user_id = Auth::id();
+        $posts =
+            Post::with(['user', 'area', 'favorites' => function ($query) use ($user_id) {
+                $query->where('favorites.user_id', $user_id);
+            }])
+            ->orderBy('posts.created_at', 'desc');
+
+        // もし検索するエリアがあったら一致するエリアを取得
+        // 検索するエリアがなかったら全部表示
         $search_area = $request->input('area');
-        $query = Area::query();
-        //一致するカラムを取得
-        if ($request->has('area') && $search_area != ('地方別検索')) {
-            $query->where('area', $search_area)->get();
+        if ($search_area) {
+            $posts->whereHas('area', function ($query) use ($search_area) {
+                $query->where('id', $search_area);
+            });
         }
 
-        return view('posts.index', [
-            'posts' => $posts,
-            'areas' => $areas,
-        ]);
+        $posts = $posts->paginate(10);
+
+        return view('posts.index', compact('posts', 'areas', 'search_area'));
     }
 
     /**
