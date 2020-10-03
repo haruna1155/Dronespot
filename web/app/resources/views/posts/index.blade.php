@@ -7,12 +7,11 @@
     <div class="col-6 justify-content-around mx-auto">
         {!! Form::open(['route' => ['posts.index'], 'method' => 'get']) !!}
             <div class="form-group mt-3 d-flex">
-                {!! Form::select('area', $areas, old('area'), ['class' => 'form-control' ,'placeholder' => '地方別検索']) !!}
+                {!! Form::select('area', $areas, $search_area, ['class' => 'form-control' ,'placeholder' => '地方別検索', 'name' => "area"]) !!}
                 {!! Form::submit('検索', ['class' => 'btn btn-info']) !!}
             </div>
         {!! Form::close() !!}
     </div>
-
 
 
     {{-- 投稿一覧 --}}
@@ -21,5 +20,8 @@
     <div class="mt-3 mb-2 row justify-content-center">
         {{ $posts->links() }}
     </div>
+
+
+
 
 @endsection
