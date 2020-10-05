@@ -18,15 +18,14 @@ class Area extends Model
      * @return array
      */
 
-     public static function toSimpleArry()
-     {
-         $rtn = [];
+    public static function toSimpleArray()
+    {
+        $rtn = [];
 
-         foreach (self::orderBy('id')->get() as $e) {
+        foreach (self::orderBy('id')->get() as $e) {
             $rtn[$e->id] = $e->name;
         }
 
         return $rtn;
     }
-     }
 }
