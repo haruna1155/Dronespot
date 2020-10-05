@@ -41,7 +41,7 @@ class PostsController extends Controller
             });
         }
 
-        $posts = $posts->paginate(10);
+        $posts = $posts->paginate(10)->appends(['area' => $search_area]);
 
         return view('posts.index', compact('posts', 'areas', 'search_area'));
     }
