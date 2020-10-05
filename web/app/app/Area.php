@@ -12,4 +12,21 @@ class Area extends Model
     {
         return $this->hasMany(Post::class);
     }
+    /**
+     * エリア一覧を、 [ {id} => {name} ] の形式で取得する。
+     *
+     * @return array
+     */
+
+     public static function toSimpleArry()
+     {
+         $rtn = [];
+
+         foreach (self::orderBy('id')->get() as $e) {
+            $rtn[$e->id] = $e->name;
+        }
+
+        return $rtn;
+    }
+     }
 }
