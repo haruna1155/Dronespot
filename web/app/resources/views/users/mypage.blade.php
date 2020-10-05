@@ -34,9 +34,8 @@
         <div class="tab-content">
             <div class="tab-pane show active" id="my-posts" role="tabpanel" aria-labelledby="my-posts-tab">
                 {{-- TODO: 自分が投稿したスポットを渡す --}}
-                {{-- 例： @include('posts.posts', ['posts' => $myPosts, 'size' => 'lg']) --}}
                 <div class="row justify-content-center">
-                    @include('posts.posts', ['size' => 'lg'])
+                    @include('posts.posts')
                     <div class="mt-3">
                         {{ $posts->links() }}
                     </div>
@@ -46,7 +45,7 @@
                 {{-- TODO: お気に入り一覧を渡す --}}
                 {{-- 例： @include('posts.posts', ['posts' => $myFavorites, 'size' => 'lg']) --}}
                 <div class="row justify-content-center">
-                    @include('posts.posts', ['size' => 'lg'])
+                    @include('posts.posts')
                     <div class="mt-3">
                         {{ $posts->links() }}
                     </div>

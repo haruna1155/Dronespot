@@ -1,14 +1,12 @@
 @if (count($posts) > 0)
     <div class="row">
         @foreach ($posts as $post)
-            <div class="{{ $size === 'lg' ? "col-lg-4 col-md-6 col-sm-12" : "col-lg-6 col-md-12" }}">
+            <div class="col-lg-4 col-md-6 col-sm-12">
                 <div class="card mt-3 max-auto">
 
                     <img class="card-img-top" src={{ $post->photo }} alt="posts">
                     <style>
                         .card-img-top {
-                            display: block;
-                            max-width: 100%;
                             max-height: 200px;
                             object-fit: cover;
                         }
