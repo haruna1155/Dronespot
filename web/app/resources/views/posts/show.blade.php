@@ -15,26 +15,28 @@
                 <h5 class="card-header">スポット: {{ $post->spot }}</h5>
                 <div class="list-group list-group-flush">
                     <p class="list-group-item">投稿日時: {{ $post->created_at }}</p>
-                    <p class="list-group-item">ユーザー名: {{ $user->name }}</p>
+                    <p class="list-group-item">ユーザー名: {{ $post->name }}</p>
                     <p class="list-group-item">エリア： {{ $post->area->name }}</p>
                     <p class="list-group-item">アクセス： {{ $post->access }}</p>
                     <p class="list-group-item">コメント： {{ $post->comment }}</p>
                 </div>
+                @if (Auth::id())
                     <div class="card-body d-flex justify-content-end">
-                    @if(Auth::id() == $post->user_id)
-                        {{--編集--}}
-                        <a href="{{ route('posts.edit', ['post' => $post->id]) }}" class="btn btn-outline-success btn-sm">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        {{--削除--}}
-                        {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'delete']) !!}
-                            {!! Form::button('<i class="fas fa-trash"></i>', ['class' =>"btn btn-outline-danger btn-sm", 'type' => 'submit']) !!}
-                        {!! Form::close() !!}
-                    @else
-                        {{--お気に入り--}}
-                        @include('commons.favorite_button')
-                    @endif
-                </div>
+                        @if (Auth::id() == $post->user_id)
+                            {{--編集--}}
+                            <a href="{{ route('posts.edit', ['post' => $post->id]) }}" class="btn btn-outline-success btn-sm">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            {{--削除--}}
+                            {!! Form::open(['route' => ['posts.destroy', $post->id], 'method' => 'delete']) !!}
+                                {!! Form::button('<i class="fas fa-trash"></i>', ['class' =>"btn btn-outline-danger btn-sm", 'type' => 'submit']) !!}
+                            {!! Form::close() !!}
+                        @else
+                            {{--お気に入り--}}
+                            @include('commons.favorite_button')
+                        @endif
+                    </div>
+                @endif
             </div>
         </div>
     </div>
