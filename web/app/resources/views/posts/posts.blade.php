@@ -7,7 +7,7 @@
                     <img class="card-img-top" src={{ $post->photo }} alt="posts">
                     <style>
                         .card-img-top {
-                            max-height: 200px;
+                            height: 200px;
                             object-fit: cover;
                         }
                     </style>
