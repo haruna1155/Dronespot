@@ -2,7 +2,7 @@
     <div class="row">
         @foreach ($posts as $post)
             <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="card mt-3 max-auto">
+                <div class="card mt-3">
 
                     <img class="card-img-top" src={{ $post->photo }} alt="posts">
                     <style>

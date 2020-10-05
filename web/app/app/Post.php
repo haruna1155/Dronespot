@@ -3,9 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
 {
+    const PHOTO_DIR = 'public/photos/{user_id}';
+
     protected $fillable = [
         'photo', 'spot', 'access', 'comment',
     ];
@@ -19,6 +23,20 @@ class Post extends Model
     {
         return $this->belongsTo(Area::class);
     }
+
+    /**
+     * アップロードされた写真をサーバー側に格納する。
+     *
+     * @param int $user_id ユーザーID
+     * @param UploadedFile $photo 写真ファイル
+     * @return string 格納後の写真のパス
+     */
+    public static function putPhoto(int $user_id, UploadedFile $photo)
+    {
+        $dir = str_replace('{user_id}', $user_id, self::PHOTO_DIR);
+        return  Storage::url($photo->store($dir));
+    }
+
 
     public function favorites()
     {

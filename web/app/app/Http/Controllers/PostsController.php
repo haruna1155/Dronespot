@@ -100,13 +100,13 @@ class PostsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post  $post)
     {
         $user = \Auth::user();
-        $post = Post::findOrFail($id);
+        $user->loadRelationshipCounts();
 
 
         return view('posts.show', [
