@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
 {
-    const PHOTO_DIR = 'public/photos/{user_id}';
+    const PHOTO_DIR = 'photos/{user_id}';
 
     protected $fillable = [
         'photo', 'spot', 'access', 'comment',
@@ -40,7 +40,9 @@ class Post extends Model
     public static function putPhoto(int $user_id, UploadedFile $photo)
     {
         $dir = str_replace('{user_id}', $user_id, self::PHOTO_DIR);
-        return  Storage::url($photo->store($dir));
+        $path = Storage::disk('s3')->put($dir, $photo, 'public');
+
+        return Storage::disk('s3')->url($path);
     }
 
     /**
