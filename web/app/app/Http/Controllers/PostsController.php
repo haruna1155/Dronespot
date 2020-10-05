@@ -40,8 +40,8 @@ class PostsController extends Controller
                 $query->where('id', $search_area);
             });
         }
-
-        $posts = $posts->paginate(10);
+        //ページ切り替え時にも検索を有効化
+        $posts = $posts->paginate(10)->appends(['area' => $search_area]);
 
         return view('posts.index', compact('posts', 'areas', 'search_area'));
     }
