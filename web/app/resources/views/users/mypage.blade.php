@@ -21,34 +21,32 @@
     <div class="mt-2 mb-3  nav-justified">
         <ul class="nav nav-tabs" id="list-tab" role="tablist">
             <li class="nav-item">
-                <a class="nav-link active" id="my-posts-tab" data-toggle="tab" href="#my-posts" role="tab" aria-controls="my-posts" aria-selected="true">
+                <a class="nav-link {{ $active_tab == 'my-posts' ? 'active' : '' }}" id="my-posts-tab" data-toggle="tab" href="#my-posts" role="tab" aria-controls="my-posts" aria-selected="my-posts">
                     スポット
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" id="my-favorites-tab" data-toggle="tab" href="#my-favorites" role="tab" aria-controls="my-favorites" aria-selected="false">
+                <a class="nav-link {{ $active_tab == 'my-favorites' ? 'active' : '' }}" id="my-favorites-tab" data-toggle="tab" href="#my-favorites" role="tab" aria-controls="my-favorites" aria-selected="my-favorites">
                     お気に入り
                 </a>
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane show active" id="my-posts" role="tabpanel" aria-labelledby="my-posts-tab">
-                {{-- TODO: 自分が投稿したスポットを渡す --}}
-                {{-- 例： @include('posts.posts', ['posts' => $myPosts, 'size' => 'lg']) --}}
+            <div class="tab-pane {{ $active_tab == 'my-posts' ? 'active' : '' }}" id="my-posts" role="tabpanel" aria-labelledby="my-posts-tab">
+                {{-- 自分が投稿したスポット --}}
                 <div class="row justify-content-center">
-                    @include('posts.posts', ['size' => 'lg'])
+                    @include('posts.posts', ['posts' => $my_posts])
                     <div class="mt-3">
-                        {{ $posts->links() }}
+                        {{ $my_posts->links() }}
                     </div>
                 </div>
             </div>
-            <div class="tab-pane" id="my-favorites" role="tabpanel" aria-labelledby="my-favorites-tab">
-                {{-- TODO: お気に入り一覧を渡す --}}
-                {{-- 例： @include('posts.posts', ['posts' => $myFavorites, 'size' => 'lg']) --}}
+            <div class="tab-pane {{ $active_tab == 'my_favorites' ? 'active' : '' }}" id="my-favorites" role="tabpanel" aria-labelledby="my-favorites-tab">
+                {{-- お気に入り一覧 --}}
                 <div class="row justify-content-center">
-                    @include('posts.posts', ['size' => 'lg'])
+                    @include('posts.posts', ['posts' => $my_favorites])
                     <div class="mt-3">
-                        {{ $posts->links() }}
+                        {{ $my_favorites->links() }}
                     </div>
                 </div>
             </div>

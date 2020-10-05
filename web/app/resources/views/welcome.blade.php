@@ -41,7 +41,7 @@
     </div>
 
     {{--post--}}
-    @include('posts.posts', ['size' => 'lg'])
+    @include('posts.posts')
 
     <div class="row mt-3 mb-4">
         <div class="d-flex justify-content-center btn-block">
