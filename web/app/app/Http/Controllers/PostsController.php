@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 use App\Post;
 use App\Area;
@@ -19,30 +18,13 @@ class PostsController extends Controller
     public function index(Request $request)
     {
         // エリア一覧を取得
-        $areas = [];
-        foreach (Area::orderBy('id')->get() as $area) {
-            $areas[$area->id] = $area->name;
-        }
+        $areas = Area::toSimpleArray();
 
-        // 全件取得用クエリを設定
-        $user_id = Auth::id();
-        $posts =
-            Post::with(['user', 'area', 'favorites' => function ($query) use ($user_id) {
-                $query->where('favorites.user_id', $user_id);
-            }])
-            ->orderBy('posts.created_at', 'desc');
-
-        // もし検索するエリアがあったら一致するエリアを取得
-        // 検索するエリアがなかったら全部表示
+        // エリアを検索
         $search_area = $request->input('area');
-        if ($search_area) {
-            $posts->whereHas('area', function ($query) use ($search_area) {
-                $query->where('id', $search_area);
-            });
-        }
-
-        $posts = $posts->paginate(10)->appends(['area' => $search_area]);
-
+        $posts =
+            Post::genarateSearchQuery(Auth::id(), ['area_id' => $search_area])
+            ->paginate(10)->appends(['area' => $search_area]);
         return view('posts.index', compact('posts', 'areas', 'search_area'));
     }
 
@@ -53,15 +35,9 @@ class PostsController extends Controller
      */
     public function create()
     {
-        $post = new Post;
-        $areas = [];
-        foreach (Area::orderBy('id')->get() as $area) {
-            $areas[$area->id] = $area->name;
-        }
-
         return view('posts.create', [
-            'post' => $post,
-            'areas' => $areas,
+            'post' => new Post(),
+            'areas' => Area::toSimpleArray(),
         ]);
     }
 
@@ -90,7 +66,7 @@ class PostsController extends Controller
         // DBに保存
         $post = new Post($request->post());
         $post->user_id = $user_id;
-        $post->area_id = $request->post()['area'];
+        $post->area_id = $request->area;
         $post->photo = $photo_url;
         $post->save();
 
@@ -105,62 +81,64 @@ class PostsController extends Controller
      */
     public function show(Post  $post)
     {
-        $user = \Auth::user();
-        $user->loadRelationshipCounts();
-
+        // 必要な情報をくっつける
+        $post = Post::with(['user', 'area', 'favorites' => function ($query) {
+            $query->where('favorites.user_id',  Auth::id());
+        }])->find($post->id);
 
         return view('posts.show', [
             'post' => $post,
-            'user' => $user,
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  App\Post $post
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        $post = Post::findOrFail($id);
 
-        if (\Auth::id() === $post->user_id) {
-            return view('posts.edit', [
-                'post' => $post,
-            ]);
-        } else {
+        if (Auth::id() === $post->user_id) {
             return redirect('/');
         }
+        return view('posts.edit', [
+            'post' => $post,
+            'areas' => Area::toSimpleArray(),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  App\Post $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
+        // 投稿主が違うなら、トップページへ
+        $user = Auth::user();
+        if ($user->id !== $post->user_id) {
+            return redirect('/');
+        }
+        // バリデーション
         $request->validate([
             //'photo' => 'required|file|image|mimes:jpeg,png',
             'spot' => 'required|max:30',
-            'area_id' => 'required',
+            'area' => 'required',
             'access' => 'required',
             'comment' => 'required|max:300',
         ]);
 
-        $post = Post::findOrFail($id);
-        $user = \Auth::user();
+        // DBに保存
+        $post->spot = $request->spot;
+        $post->area_id = $request->area;
+        $post->access = $request->access;
+        $post->comment = $request->comment;
+        $post->save();
 
-        if (\Auth::id() === $post->user_id) {
-            $post->spot = $request->spot;
-            $post->area_id = $request->post()['area'];
-            $post->access = $request->access;
-            $post->comment = $request->comment;
-            $post->save();
-        }
         return view('posts.show', [
             'post' => $post,
             'user' => $user,
@@ -170,16 +148,16 @@ class PostsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  App/Post $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        $post = Post::findOrFail($id);
-
-        if (\Auth::id() === $post->user_id) {
-            $post->delete();
+        // 投稿主が違うなら、トップページへ
+        if (Auth::id() !== $post->user_id) {
+            return redirect('/');
         }
+        $post->delete();
         return redirect('/');
     }
 }
