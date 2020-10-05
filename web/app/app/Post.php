@@ -24,6 +24,12 @@ class Post extends Model
         return $this->belongsTo(Area::class);
     }
 
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class);
+    }
+
+
     /**
      * アップロードされた写真をサーバー側に格納する。
      *
@@ -35,12 +41,6 @@ class Post extends Model
     {
         $dir = str_replace('{user_id}', $user_id, self::PHOTO_DIR);
         return  Storage::url($photo->store($dir));
-    }
-
-
-    public function favorites()
-    {
-        return $this->hasMany(Favorite::class);
     }
 
     /**
