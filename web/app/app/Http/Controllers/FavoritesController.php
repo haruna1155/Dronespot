@@ -19,7 +19,7 @@ class FavoritesController extends Controller
 
         //既に登録済みなら何もしない
         $post_id = $post->id;
-        $favorite = $this->findFavorite($user_id, $post_id);
+        $favorite = Favorite::findFavorite($user_id, $post_id);
         if ($favorite) {
             return back();
         }
@@ -34,7 +34,7 @@ class FavoritesController extends Controller
         // お気に入りしてなければ、何もしない
         $user_id = Auth::id();
         $post_id = $post->id;
-        $favorite = $this->findFavorite($user_id, $post_id);
+        $favorite = Favorite::findFavorite($user_id, $post_id);
         if (!$favorite) {
             return back();
         }
@@ -42,19 +42,5 @@ class FavoritesController extends Controller
         // お気に入り解除
         $favorite->delete();
         return back();
-    }
-
-    /**
-     * スポットIDとユーザーIDをもとに、お気に入りを検索
-     *
-     * @param int $user_id
-     * @param int $post_id
-     * @return App\Favorite|null
-     */
-    private function findFavorite(int $user_id, int $post_id)
-    {
-        return Favorite::where('user_id', $user_id)
-            ->where('post_id', $post_id)
-            ->first();
     }
 }

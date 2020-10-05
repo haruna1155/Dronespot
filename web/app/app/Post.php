@@ -50,7 +50,7 @@ class Post extends Model
      * @param array $condition ['area_id' => int, 'mine_only' => bool, 'my_favorites_only' => bool]
      * @return Illuminate\Database\Eloquent\Builder
      */
-    static public function genarateSearchQuery(int $user_id, array $condition = [])
+    static public function genarateSearchQuery(?int $user_id, array $condition = [])
     {
         // 全件検索
         $query =
