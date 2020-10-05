@@ -15,7 +15,7 @@
                 <h5 class="card-header">スポット: {{ $post->spot }}</h5>
                 <div class="list-group list-group-flush">
                     <p class="list-group-item">投稿日時: {{ $post->created_at }}</p>
-                    <p class="list-group-item">ユーザー名: {{ $post->name }}</p>
+                    <p class="list-group-item">ユーザー名: {{ $post->user->name }}</p>
                     <p class="list-group-item">エリア： {{ $post->area->name }}</p>
                     <p class="list-group-item">アクセス： {{ $post->access }}</p>
                     <p class="list-group-item">コメント： {{ $post->comment }}</p>
