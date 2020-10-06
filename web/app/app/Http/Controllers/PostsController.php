@@ -24,7 +24,7 @@ class PostsController extends Controller
         $search_area = $request->input('area');
         $posts =
             Post::genarateSearchQuery(Auth::id(), ['area_id' => $search_area])
-            ->paginate(10)->appends(['area' => $search_area]);
+            ->paginate(12)->appends(['area' => $search_area]);
         return view('posts.index', compact('posts', 'areas', 'search_area'));
     }
 
