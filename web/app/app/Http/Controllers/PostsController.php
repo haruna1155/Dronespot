@@ -100,7 +100,7 @@ class PostsController extends Controller
     public function edit(Post $post)
     {
 
-        if (Auth::id() === $post->user_id) {
+        if (Auth::id() !== $post->user_id) {
             return redirect('/');
         }
         return view('posts.edit', [
